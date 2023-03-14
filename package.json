@@ -1,0 +1,44 @@
+{
+  "name": "vite-six",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
+    "@turf/turf": "^6.5.0",
+    "@vueuse/core": "^9.13.0",
+    "axios": "^1.3.4",
+    "css-loader": "^6.7.3",
+    "element-plus": "^2.3.0",
+    "mockjs": "^1.1.0",
+    "normalize": "^0.3.1",
+    "normalize.css": "^8.0.1",
+    "pinia": "^2.0.33",
+    "proj4": "^2.8.1",
+    "style-loader": "^3.3.1",
+    "vue": "^3.2.45",
+    "vue-router": "^4.1.6"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.17.0",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "cesium": "^1.103.0",
+    "eslint": "^8.35.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-vue": "^9.9.0",
+    "sass": "^1.58.3",
+    "unplugin-auto-import": "^0.15.1",
+    "unplugin-vue-components": "^0.24.1",
+    "vite": "^4.1.4",
+    "vite-plugin-cesium": "^1.2.22",
+    "vite-plugin-eslint": "^1.8.1"
+  }
+}
