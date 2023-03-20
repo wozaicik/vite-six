@@ -1,6 +1,10 @@
 <template>
     <div id="cesiumContainer" ref="target">
-        <displayCoor :elementX="elementX" :elementY="elementY" :isOutside="isOutside"></displayCoor>
+        <displayCoor
+            :elementX="elementX"
+            :elementY="elementY"
+            :isOutside="isOutside"
+        ></displayCoor>
         <KeepAlive>
             <component :is="id" :key="id"></component>
         </KeepAlive>
@@ -29,7 +33,8 @@ watch(
     () => route.params.id,
     (newVal) => {
         id.value = newVal
-    }
+    },
+    { immediate: true }
 )
 </script>
 
