@@ -244,7 +244,7 @@ export default defineComponent({
     }
 })
 
-const leftEvent = (itemCoor) => {
+export const leftEvent = (itemCoor) => {
     const viewer = window.viewer
     const cartesian = itemCoor
     const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
@@ -252,6 +252,17 @@ const leftEvent = (itemCoor) => {
         cartesian.value = viewer.scene.pickPosition(movement.position)
     }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
     return { handler }
+}
+
+export const rightEvent = (isRightClick) => {
+    const isclick = isRightClick
+    const viewer = window.viewer
+    const handlerRightIs = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
+    handlerRightIs.setInputAction((movement) => {
+        isclick.value = !isclick.value
+        // console.log(isclick.value)
+    }, Cesium.ScreenSpaceEventType.RIGHT_CLICK)
+    return { handlerRightIs }
 }
 </script>
 
@@ -287,9 +298,6 @@ const leftEvent = (itemCoor) => {
         line-height: 28px;
         // background-color: skyblue;
         text-align: center;
-        .el-col {
-            // background-color: yellow;
-        }
     }
 }
 </style>
