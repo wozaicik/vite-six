@@ -8,7 +8,9 @@
             @row-dblclick="(row) => doubleClik(row)"
         >
             <template #empty>
-                <el-text size="large">---- 编辑完成后，请点击保存！ ----</el-text>
+                <el-text size="large"
+                    >---- 编辑完成后，请点击保存！ ----</el-text
+                >
                 <el-text size="large">--可双击选中行跳转位置--</el-text>
             </template>
             <el-table-column
@@ -25,8 +27,12 @@
                 prop="distance"
             />
             <el-table-column label="断面" header-align="center" align="center">
-                <template #default>
-                    <el-button link type="primary" size="small"
+                <template #default="{ row }">
+                    <el-button
+                        link
+                        type="primary"
+                        size="small"
+                        @click="claSection(row)"
                         >Section</el-button
                     >
                 </template>
@@ -43,7 +49,11 @@
                     >清除</el-button
                 ></el-col
             >
-            <el-col :span="8"></el-col>
+            <el-col :span="8">
+                <el-button round size="small" @click="closeFooter()"
+                    >关闭断面</el-button
+                >
+            </el-col>
         </el-row>
     </div>
 </template>
@@ -68,6 +78,8 @@ import { nanoid } from 'nanoid'
 import { drawPoint } from '@/utils/draw/drawPoint.js'
 import { drawPolyline } from '@/utils/draw/drawPolyline.js'
 import { turfDistance } from '@/utils/calculate/distance.js'
+import { calSection } from '@/utils/calculate/section.js'
+import { drawSection } from '@/utils/draw/drawSection'
 
 export default defineComponent({
     name: 'multipointDistance',
@@ -235,11 +247,30 @@ export default defineComponent({
             index = 1 // 序号
             itemLineId = 'line' + nanoid(6) // 新的线段id
         }
+        //
+        // 关闭断面
+        const { isFooterOpen } = storeToRefs(store)
+        const closeFooter = () => {
+            if (isFooterOpen.value) {
+                isFooterOpen.value = false
+            }
+        }
+        // 绘制断面
+        const claSection = (row) => {
+            if (!isFooterOpen.value) {
+                isFooterOpen.value = true
+            }
+            const sectionDate = calSection(row.id)
+            sectionDate.then((value) => {
+                drawSection(value)
+            })
+        }
+        //
         // 销毁事件和停止监听
         watch(
             () => route.params.id,
             (newVal) => {
-                if (newVal !== 'twoPointDistance' && handlerLeft) {
+                if (newVal !== 'multipointDistance' && handlerLeft) {
                     // 当路由变化，销毁事件
                     handlerLeft.destroy()
                     handlerLeft = null
@@ -262,7 +293,9 @@ export default defineComponent({
             tableData,
             savaAll,
             doubleClik,
-            clearAll
+            clearAll,
+            claSection,
+            closeFooter
         }
     }
 })

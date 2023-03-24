@@ -8,7 +8,9 @@
                 <el-main>
                     <viewer></viewer>
                 </el-main>
-                <el-footer v-show="isFooterOpen">ccc</el-footer>
+                <el-footer v-show="isFooterOpen">
+                    <div id="Footer"></div>
+                </el-footer>
             </el-container>
         </el-container>
     </div>
@@ -27,7 +29,8 @@ export default defineComponent({
         layoutLeftAside,
         viewer
     },
-    setup () {
+    // eslint-disable-next-line space-before-function-paren
+    setup() {
         const store = layoutStore()
         const { isLeftCollapse, isFooterOpen } = storeToRefs(store)
         return {
@@ -64,6 +67,10 @@ export default defineComponent({
             margin: 0;
             padding: 0;
             height: 300px;
+            div {
+                height: 100%;
+                width: 100%;
+            }
         }
     }
 }
