@@ -41,3 +41,41 @@ export const drawPoint = (coor, id, index) => {
 
     return { entityPoint }
 }
+
+export const drawPointColor = (coor, id, index, color) => {
+    const cesiumColor = {
+        red: Cesium.Color.RED,
+        yellow: Cesium.Color.YELLOW
+    }
+    let viewer = window.viewer
+    const entityPoint = viewer.entities.add({
+        id,
+        position: toRaw(coor),
+        // position: toRaw(coor.value),
+        point: {
+            color: cesiumColor[color],
+            pixelSize: 1.5,
+            // outlineColor: Cesium.Color.YELLOW,
+            // outlineWidth: 1,
+            heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+            // disableDepthTestDistance: 0
+            disableDepthTestDistance: Number.POSITIVE_INFINITY
+            // heightReference: Cesium.HeightReference.RELATIVE_TO_GROUND
+            // heightReference: Cesium.HeightReference.NONE
+        },
+        label: {
+            text: index.toString(),
+            font: '16px sans-serif',
+            style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+            outlineWidth: 2,
+            heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+            verticalOrigin: Cesium.VerticalOrigin.BASELINE,
+            pixelOffset: new Cesium.Cartesian2(0, -10),
+            // disableDepthTestDistance: 0 // draws the label in front of terrain
+            disableDepthTestDistance: Number.POSITIVE_INFINITY // draws the label in front of terrain
+        }
+    })
+    viewer = null
+
+    return { entityPoint }
+}

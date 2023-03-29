@@ -283,13 +283,6 @@ export default defineComponent({
         // ///
 
         return {
-            index,
-            itemLineId,
-            coorArray,
-            itemCoor,
-            entityIds,
-            handlerLeft,
-            handlerRight,
             tableData,
             savaAll,
             doubleClik,
