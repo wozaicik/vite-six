@@ -6,9 +6,13 @@ export const car3ToLonLatDegree = (car3) => {
     const lonLatDegree = ref({ x: 0, y: 0, z: 0 })
     if (car3) {
         const lonLatRadian = Cesium.Cartographic.fromCartesian(car3)
-        lonLatDegree.value.x = Cesium.Math.toDegrees(lonLatRadian.longitude)
-        lonLatDegree.value.y = Cesium.Math.toDegrees(lonLatRadian.latitude)
-        lonLatDegree.value.z = lonLatRadian.height
+        lonLatDegree.value.x = Cesium.Math.toDegrees(
+            lonLatRadian?.longitude ? lonLatRadian.longitude : 0
+        )
+        lonLatDegree.value.y = Cesium.Math.toDegrees(
+            lonLatRadian?.latitude ? lonLatRadian.latitude : 0
+        )
+        lonLatDegree.value.z = lonLatRadian?.height ? lonLatRadian.height : 0
     } else {
         return lonLatDegree
     }
@@ -48,10 +52,10 @@ export const car3ToLocal = (car3) => {
     const local = ref({ x: 0, y: 0, z: 0 })
     if (car3) {
         const cgcs = car3ToCGCS(car3)
-        const dx = -374100
-        const dy = -2531700
-        const m = 0.999977 // 缩放比例
-        const da = 0.00485289032 // 旋转角度
+        const dx = -374140
+        const dy = -2531790
+        const m = 0.9999804396131 // 缩放比例
+        const da = 0.0048672455037 // 旋转角度
         local.value.x =
             dx +
             m * Math.cos(da) * cgcs.value.x -
